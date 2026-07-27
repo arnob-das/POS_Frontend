@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./features/authSlice";
 import { Home, Auth, Orders, Tables, Menu, AdminDashboard } from "./pages";
@@ -65,7 +70,7 @@ function App() {
               <AdminDashboard />
             </ProtectedRoute>
           }
-        />
+        />  
 
         {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -17,10 +17,10 @@ export const loginUser = createAsyncThunk(
       return { user: data, token: accessToken };
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Login failed. Check credentials."
+        error.response?.data?.message || "Login failed. Check credentials.",
       );
     }
-  }
+  },
 );
 
 export const registerUser = createAsyncThunk(
@@ -31,10 +31,10 @@ export const registerUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Registration failed."
+        error.response?.data?.message || "Registration failed.",
       );
     }
-  }
+  },
 );
 
 export const fetchCurrentUser = createAsyncThunk(
@@ -44,9 +44,11 @@ export const fetchCurrentUser = createAsyncThunk(
       const response = await API.get("/user/me");
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch user");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch user",
+      );
     }
-  }
+  },
 );
 
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
@@ -57,6 +59,8 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   }
   localStorage.removeItem("accessToken");
   localStorage.removeItem("user");
+  localStorage.removeItem("cart");
+  localStorage.removeItem("customer");
 });
 
 const authSlice = createSlice({

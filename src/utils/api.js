@@ -26,4 +26,22 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Response interceptor to handle expired tokens / unauthorized requests
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      localStorage.removeItem("cart");
+      localStorage.removeItem("customer");
+      if (window.location.pathname !== "/auth") {
+        window.location.href = "/auth";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default API;
+

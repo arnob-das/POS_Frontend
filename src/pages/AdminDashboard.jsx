@@ -153,7 +153,8 @@ const AdminDashboard = () => {
   };
 
   const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Are you sure you want to delete this user account?")) return;
+    if (!window.confirm("Are you sure you want to delete this user account?"))
+      return;
     try {
       await API.delete(`/user/${userId}`);
       fetchDashboardData();
@@ -164,17 +165,28 @@ const AdminDashboard = () => {
 
   const maxDailySales = Math.max(
     ...analyticsData.dailyStats.map((d) => d.totalSales || 1),
-    100
+    100,
   );
 
   // Filter menu items by search and category
   const filteredMenu = menuList.filter((item) => {
-    const matchesSearch = item.name.toLowerCase().includes(menuSearch.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+    const matchesSearch = item.name
+      .toLowerCase()
+      .includes(menuSearch.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const categories = ["All", "Fast Food", "Main Course", "Pizza", "Beverages", "Sides", "Desserts"];
+  const categories = [
+    "All",
+    "Fast Food",
+    "Main Course",
+    "Pizza",
+    "Beverages",
+    "Sides",
+    "Desserts",
+  ];
 
   return (
     <section className="bg-[#141414] min-h-[calc(100vh-4rem)] overflow-y-auto pb-24 text-white font-sans">
@@ -187,7 +199,8 @@ const AdminDashboard = () => {
               <FaShieldAlt className="text-amber-400" /> Admin Control Center
             </h1>
             <p className="text-[11px] text-gray-400">
-              Manage analytics, staff accounts, menu items, & dining tables by tabs
+              Manage analytics, staff accounts, menu items, & dining tables by
+              tabs
             </p>
           </div>
         </div>
@@ -197,7 +210,9 @@ const AdminDashboard = () => {
           <button
             onClick={() => setActiveTab("overview")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "overview" ? "bg-amber-500 text-black shadow" : "text-gray-400 hover:text-white"
+              activeTab === "overview"
+                ? "bg-amber-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             Overview
@@ -205,7 +220,9 @@ const AdminDashboard = () => {
           <button
             onClick={() => setActiveTab("analytics")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "analytics" ? "bg-amber-500 text-black shadow" : "text-gray-400 hover:text-white"
+              activeTab === "analytics"
+                ? "bg-amber-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             Analytics
@@ -213,7 +230,9 @@ const AdminDashboard = () => {
           <button
             onClick={() => setActiveTab("staffs")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "staffs" ? "bg-amber-500 text-black shadow" : "text-gray-400 hover:text-white"
+              activeTab === "staffs"
+                ? "bg-amber-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             Staffs ({users.length})
@@ -221,7 +240,9 @@ const AdminDashboard = () => {
           <button
             onClick={() => setActiveTab("menu")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "menu" ? "bg-amber-500 text-black shadow" : "text-gray-400 hover:text-white"
+              activeTab === "menu"
+                ? "bg-amber-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             Menu ({menuList.length})
@@ -229,7 +250,9 @@ const AdminDashboard = () => {
           <button
             onClick={() => setActiveTab("tables")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "tables" ? "bg-amber-500 text-black shadow" : "text-gray-400 hover:text-white"
+              activeTab === "tables"
+                ? "bg-amber-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             Tables ({tables.length})
@@ -261,13 +284,19 @@ const AdminDashboard = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-[#1c1c1c] p-4 rounded-2xl border border-[#2a2a2a]">
                   <div>
                     <h2 className="text-sm font-extrabold text-white flex items-center gap-2">
-                      <FaCashRegister className="text-amber-400" /> Date-wise Revenue & Table Occupancy
+                      <FaCashRegister className="text-amber-400" /> Date-wise
+                      Revenue & Table Occupancy
                     </h2>
-                    <p className="text-xs text-gray-400 mt-0.5">Select any date to view historical revenue and occupied tables</p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      Select any date to view historical revenue and occupied
+                      tables
+                    </p>
                   </div>
                   <div className="flex items-center gap-2 bg-[#141414] border border-[#333] px-3 py-1.5 rounded-xl text-xs">
                     <FaCalendarAlt className="text-amber-400 text-xs" />
-                    <span className="text-gray-400 font-semibold text-[11px]">Select Date:</span>
+                    <span className="text-gray-400 font-semibold text-[11px]">
+                      Select Date:
+                    </span>
                     <input
                       type="date"
                       value={selectedDate}
@@ -280,7 +309,9 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-4 shadow flex items-center justify-between">
                     <div>
-                      <p className="text-[11px] font-semibold text-gray-400">Total Revenue ({selectedDate})</p>
+                      <p className="text-[11px] font-semibold text-gray-400">
+                        Total Revenue ({selectedDate})
+                      </p>
                       <h3 className="text-2xl font-extrabold text-amber-400 mt-1">
                         {analyticsData.summary.totalRevenue || 0} TK
                       </h3>
@@ -292,7 +323,9 @@ const AdminDashboard = () => {
 
                   <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-4 shadow flex items-center justify-between">
                     <div>
-                      <p className="text-[11px] font-semibold text-gray-400">Occupied Tables ({selectedDate})</p>
+                      <p className="text-[11px] font-semibold text-gray-400">
+                        Occupied Tables ({selectedDate})
+                      </p>
                       <h3 className="text-2xl font-extrabold text-emerald-400 mt-1">
                         {analyticsData.summary.occupiedTablesCount || 0} Tables
                       </h3>
@@ -304,7 +337,9 @@ const AdminDashboard = () => {
 
                   <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-4 shadow flex items-center justify-between">
                     <div>
-                      <p className="text-[11px] font-semibold text-gray-400">Total Bills ({selectedDate})</p>
+                      <p className="text-[11px] font-semibold text-gray-400">
+                        Total Bills ({selectedDate})
+                      </p>
                       <h3 className="text-2xl font-extrabold text-white mt-1">
                         {analyticsData.summary.totalOrdersCount || 0}
                       </h3>
@@ -316,7 +351,9 @@ const AdminDashboard = () => {
 
                   <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-4 shadow flex items-center justify-between">
                     <div>
-                      <p className="text-[11px] font-semibold text-gray-400">Staff Accounts Active</p>
+                      <p className="text-[11px] font-semibold text-gray-400">
+                        Staff Accounts Active
+                      </p>
                       <h3 className="text-2xl font-extrabold text-white mt-1">
                         {users.length}
                       </h3>
@@ -334,7 +371,8 @@ const AdminDashboard = () => {
               <div className="space-y-4">
                 <div className="flex justify-between items-center bg-[#1c1c1c] p-3.5 rounded-2xl border border-[#2a2a2a]">
                   <h3 className="text-xs font-bold text-white flex items-center gap-2">
-                    <FaCalendarAlt className="text-amber-400" /> Multi-Day Revenue Trend
+                    <FaCalendarAlt className="text-amber-400" /> Multi-Day
+                    Revenue Trend
                   </h3>
                   <select
                     value={daysFilter}
@@ -352,10 +390,13 @@ const AdminDashboard = () => {
                     {analyticsData.dailyStats.map((day) => {
                       const barHeightPercent = Math.max(
                         Math.round((day.totalSales / maxDailySales) * 100),
-                        12
+                        12,
                       );
                       return (
-                        <div key={day._id} className="flex-1 flex flex-col items-center min-w-[50px]">
+                        <div
+                          key={day._id}
+                          className="flex-1 flex flex-col items-center min-w-[50px]"
+                        >
                           <span className="text-[10px] text-amber-400 font-bold mb-1">
                             {day.totalSales} TK
                           </span>
@@ -378,7 +419,8 @@ const AdminDashboard = () => {
             {activeTab === "staffs" && (
               <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-5 shadow-xl space-y-4">
                 <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                  <FaUsers className="text-amber-400" /> System Staff & Role Management ({users.length} Accounts)
+                  <FaUsers className="text-amber-400" /> System Staff & Role
+                  Management ({users.length} Accounts)
                 </h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs text-left border-collapse">
@@ -394,13 +436,19 @@ const AdminDashboard = () => {
                     <tbody className="divide-y divide-[#262626]">
                       {users.map((u) => (
                         <tr key={u._id} className="hover:bg-[#222222]">
-                          <td className="py-2.5 px-3 font-bold text-white">{u.name}</td>
-                          <td className="py-2.5 px-3 text-gray-300 font-mono">{u.email}</td>
+                          <td className="py-2.5 px-3 font-bold text-white">
+                            {u.name}
+                          </td>
+                          <td className="py-2.5 px-3 text-gray-300 font-mono">
+                            {u.email}
+                          </td>
                           <td className="py-2.5 px-3 font-mono">{u.phone}</td>
                           <td className="py-2.5 px-3">
                             <select
                               value={u.role}
-                              onChange={(e) => handleUpdateRole(u._id, e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateRole(u._id, e.target.value)
+                              }
                               className="bg-[#141414] border border-[#333] text-amber-400 text-xs px-2 py-1 rounded font-bold outline-none cursor-pointer"
                             >
                               <option value="admin">Admin</option>
@@ -431,9 +479,13 @@ const AdminDashboard = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#2a2a2a] pb-3">
                   <div>
                     <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                      <FaUtensils className="text-amber-400" /> Menu Customization Page ({filteredMenu.length} of {menuList.length} Dishes)
+                      <FaUtensils className="text-amber-400" /> Menu
+                      Customization Page ({filteredMenu.length} of{" "}
+                      {menuList.length} Dishes)
                     </h3>
-                    <p className="text-xs text-gray-400 mt-0.5">Filter by category or search all dishes</p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      Filter by category or search all dishes
+                    </p>
                   </div>
                   <button
                     onClick={() => setIsAddMenuOpen(true)}
@@ -485,8 +537,12 @@ const AdminDashboard = () => {
                         className="bg-[#141414] border border-[#2a2a2a] p-3 rounded-xl flex justify-between items-center shadow hover:border-amber-500/30 transition-all"
                       >
                         <div>
-                          <h4 className="text-xs font-bold text-white">{dish.name}</h4>
-                          <p className="text-xs text-amber-400 font-black mt-0.5">{dish.price} TK</p>
+                          <h4 className="text-xs font-bold text-white">
+                            {dish.name}
+                          </h4>
+                          <p className="text-xs text-amber-400 font-black mt-0.5">
+                            {dish.price} TK
+                          </p>
                           <span className="text-[9px] font-bold text-gray-400 bg-[#242424] px-2 py-0.5 rounded mt-1 inline-block">
                             {dish.category}
                           </span>
@@ -509,7 +565,8 @@ const AdminDashboard = () => {
               <div className="bg-[#1c1c1c] border border-[#2a2a2a] rounded-2xl p-5 shadow-xl space-y-4">
                 <div className="flex justify-between items-center border-b border-[#2a2a2a] pb-3">
                   <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                    <FaTable className="text-amber-400" /> Dining Tables Management
+                    <FaTable className="text-amber-400" /> Dining Tables
+                    Management
                   </h3>
                   <button
                     onClick={() => setIsAddTableOpen(true)}
@@ -526,11 +583,17 @@ const AdminDashboard = () => {
                       className="bg-[#141414] border border-[#2a2a2a] p-3 rounded-xl flex justify-between items-center shadow hover:border-amber-500/30 transition-all"
                     >
                       <div>
-                        <h4 className="text-xs font-bold text-white">Table #{table.tableNo}</h4>
-                        <p className="text-[10px] text-gray-400">{table.seats} Seats</p>
+                        <h4 className="text-xs font-bold text-white">
+                          Table #{table.tableNo}
+                        </h4>
+                        <p className="text-[10px] text-gray-400">
+                          {table.seats} Seats
+                        </p>
                         <span
                           className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded capitalize mt-1 inline-block ${
-                            table.status === "available" ? "bg-emerald-500/20 text-emerald-400" : "bg-amber-500/20 text-amber-400"
+                            table.status === "available"
+                              ? "bg-emerald-500/20 text-emerald-400"
+                              : "bg-amber-500/20 text-amber-400"
                           }`}
                         >
                           {table.status}
@@ -553,7 +616,10 @@ const AdminDashboard = () => {
 
       {/* Add Table Modal */}
       {isAddTableOpen && (
-        <Modal title="Add New Dining Table" onCloseModal={() => setIsAddTableOpen(false)}>
+        <Modal
+          title="Add New Dining Table"
+          onCloseModal={() => setIsAddTableOpen(false)}
+        >
           <form onSubmit={handleAddTable} className="space-y-3 pt-1">
             <div>
               <label className="block text-xs font-semibold text-gray-300 mb-1">
@@ -594,10 +660,15 @@ const AdminDashboard = () => {
 
       {/* Add Menu Item Modal */}
       {isAddMenuOpen && (
-        <Modal title="Add New Menu Dish" onCloseModal={() => setIsAddMenuOpen(false)}>
+        <Modal
+          title="Add New Menu Dish"
+          onCloseModal={() => setIsAddMenuOpen(false)}
+        >
           <form onSubmit={handleAddDish} className="space-y-3 pt-1">
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Dish Name *</label>
+              <label className="block text-xs font-semibold text-gray-300 mb-1">
+                Dish Name *
+              </label>
               <input
                 type="text"
                 required
@@ -608,7 +679,9 @@ const AdminDashboard = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Price (TK) *</label>
+              <label className="block text-xs font-semibold text-gray-300 mb-1">
+                Price (TK) *
+              </label>
               <input
                 type="number"
                 required
@@ -620,7 +693,9 @@ const AdminDashboard = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-300 mb-1">Category</label>
+              <label className="block text-xs font-semibold text-gray-300 mb-1">
+                Category
+              </label>
               <select
                 value={dishCategory}
                 onChange={(e) => setDishCategory(e.target.value)}

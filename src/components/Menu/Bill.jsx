@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../../features/cartSlice";
+import { removeCustomer } from "../../features/customerSlice";
 import API from "../../utils/api";
 import { FaUtensils, FaCheckCircle } from "react-icons/fa";
 
@@ -63,6 +64,7 @@ function Bill() {
       const res = await API.post("/order", payload);
       setSuccessMsg(`Order placed successfully for Table #${customer.tableNo}! Sent to Kitchen.`);
       dispatch(clearCart());
+      dispatch(removeCustomer());
       setTimeout(() => setSuccessMsg(""), 5000);
     } catch (err) {
       console.error("Order Placement Error:", err);

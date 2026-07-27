@@ -116,7 +116,7 @@ function Orders() {
     return matchesStatus && matchesPayment && matchesSearch && matchesDate;
   });
 
-  const totalPages = Math.ceil(filteredOrders.length / itemsPerPage) || 1;
+  const totalPages = Math.ceil(filteredOrders.length / x) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(startIndex, startIndex + itemsPerPage);
 
