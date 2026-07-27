@@ -9,19 +9,9 @@ const getSavedCart = () => {
   }
 };
 
-const saveCartToStorage = (cart) => {
-  try {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  } catch (error) {
-    console.error("Failed to save cart to localStorage", error);
-  }
-};
-
-const initialState = getSavedCart();
-
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: getSavedCart(),
   reducers: {
     addToCart: (state, action) => {
       const itemIndex = state.findIndex(
@@ -35,35 +25,27 @@ const cartSlice = createSlice({
           quantity: action.payload.quantity || 1,
         });
       }
-      saveCartToStorage(state);
     },
     incrementQuantity: (state, action) => {
       const item = state.find((item) => item.id === action.payload);
       if (item) {
         item.quantity += 1;
       }
-      saveCartToStorage(state);
     },
     decrementQuantity: (state, action) => {
       const item = state.find((item) => item.id === action.payload);
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
-          saveCartToStorage(state);
         } else {
-          const newState = state.filter((i) => i.id !== action.payload);
-          saveCartToStorage(newState);
-          return newState;
+          return state.filter((i) => i.id !== action.payload);
         }
       }
     },
     removeItemFromCart: (state, action) => {
-      const newState = state.filter((item) => item.id !== action.payload);
-      saveCartToStorage(newState);
-      return newState;
+      return state.filter((item) => item.id !== action.payload);
     },
     clearCart: () => {
-      saveCartToStorage([]);
       return [];
     },
   },
@@ -77,4 +59,5 @@ export const {
   clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
+
 

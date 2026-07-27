@@ -1,29 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const defaultCustomer = {
+  customerName: "",
+  customerPhone: "",
+  guests: 0,
+  tableNo: "",
+  orderId: "",
+};
+
 const getSavedCustomer = () => {
   try {
     const saved = localStorage.getItem("customer");
-    return saved
-      ? JSON.parse(saved)
-      : { customerName: "", customerPhone: "", guests: 0, tableNo: "", orderId: "" };
+    return saved ? JSON.parse(saved) : defaultCustomer;
   } catch (error) {
-    return { customerName: "", customerPhone: "", guests: 0, tableNo: "", orderId: "" };
+    return defaultCustomer;
   }
 };
-
-const saveCustomerToStorage = (customer) => {
-  try {
-    localStorage.setItem("customer", JSON.stringify(customer));
-  } catch (error) {
-    console.error("Failed to save customer to localStorage", error);
-  }
-};
-
-const initialState = getSavedCustomer();
 
 const customerSlice = createSlice({
   name: "customer",
-  initialState,
+  initialState: getSavedCustomer(),
   reducers: {
     setCustomer: (state, action) => {
       const { name, phone, guests } = action.payload;
@@ -31,21 +27,12 @@ const customerSlice = createSlice({
       state.customerPhone = phone;
       state.guests = guests;
       state.orderId = `${Date.now()}`;
-      saveCustomerToStorage(state);
     },
 
-    removeCustomer: (state) => {
-      state.customerName = "";
-      state.customerPhone = "";
-      state.guests = 0;
-      state.tableNo = "";
-      state.orderId = "";
-      saveCustomerToStorage({ customerName: "", customerPhone: "", guests: 0, tableNo: "", orderId: "" });
-    },
+    removeCustomer: () => defaultCustomer,
 
     updateTable: (state, action) => {
       state.tableNo = action.payload.tableNo;
-      saveCustomerToStorage(state);
     },
   },
 });
